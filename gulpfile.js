@@ -3,6 +3,7 @@ const HubRegistry = require('gulp-hub');
 const browserSync = require('browser-sync');
 
 const jshint = require('gulp-jshint');
+const sass = require('gulp-sass');
 
 const conf = require('./conf/gulp.conf');
 
@@ -17,6 +18,13 @@ gulp.task('lint', () => {
   return gulp.src('js/*.js')
       .pipe(jshint())
       .pipe(jshint.reporter('default'));
+});
+
+// Compile Our Sass
+gulp.task('sass', () => {
+  return gulp.src('src/*.scss')
+      .pipe(sass())
+      .pipe(gulp.dest('dist'));
 });
 
 gulp.task('build', gulp.series(gulp.parallel('other', 'webpack:dist')));
